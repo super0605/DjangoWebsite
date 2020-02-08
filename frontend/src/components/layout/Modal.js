@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 const Modal = (props) => {
-  console.log(props)
+  console.log('hello world')
   return ReactDOM.createPortal(
     <div onClick={props.onDismiss} className='ui active dimmer'>
       <div onClick={e => e.stopPropagation()} className='ui active modal'>
