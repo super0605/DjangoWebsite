@@ -8,8 +8,13 @@ import Dashboard from './todos/Dashboard';
 import TodoDelete from './todos/TodoDelete';
 import TodoEdit from './todos/TodoEdit';
 
+import RegisterForm from './auth/RegisterForm';
+import LoginForm from './auth/LoginForm';
+import PrivateRoute from './common/PrivateRoute';
+
 import { Provider } from 'react-redux';
 import store from '../store';
+import { loadUser } from '../actions/auth';
 
 class App extends Component {
   render() {
@@ -21,6 +26,8 @@ class App extends Component {
             <Route exact path='/' component={Dashboard} />
             <Route exact path='/delete/:id' component={TodoDelete} />
             <Route exact path='/edit/:id' component={TodoEdit} />
+            <Route exact path='/register' component={RegisterForm} />
+            <Route exact path='/login' component={LoginForm} />
           </Switch>
         </Router>
       </Provider>
