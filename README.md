@@ -1,2 +1,2 @@
-# DjangoReactTodo
-Build a simple CRUD Todo app with Django, React and Semantic UI
+# DjangoReactTodo2
+A simple CRUD Todo app with Token Authentication

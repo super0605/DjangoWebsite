@@ -17,13 +17,17 @@ import store from '../store';
 import { loadUser } from '../actions/auth';
 
 class App extends Component {
+  componentDidMount() {
+    store.dispatch(loadUser());
+  }
+
   render() {
     return (
       <Provider store={store}>
         <Router history={history}>
           <Header />
           <Switch>
-            <Route exact path='/' component={Dashboard} />
+            <PrivateRoute exact path='/' component={Dashboard} />
             <Route exact path='/delete/:id' component={TodoDelete} />
             <Route exact path='/edit/:id' component={TodoEdit} />
             <Route exact path='/register' component={RegisterForm} />
