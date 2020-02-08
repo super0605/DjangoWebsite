@@ -5,6 +5,7 @@ const Modal = (props) => {
   console.log(props)
   console.log('props')
   console.log('props2')
+  console.log('test')
   return ReactDOM.createPortal(
     <div onClick={props.onDismiss} className='ui active dimmer'>
       <div onClick={e => e.stopPropagation()} className='ui active modal'>
