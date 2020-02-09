@@ -26,45 +26,51 @@ class RegisterForm extends Component {
       return <Redirect to='/' />;
     }
     return (
-      <div className='ui container'>
-        <div className='ui segment'>
-          <form
-            onSubmit={this.props.handleSubmit(this.onSubmit)}
-            className='ui form'
-          >
-            <Field
-              name='username'
-              type='text'
-              component={this.renderField}
-              label='Username'
-              validate={[required, minLength3, maxLength15]}
-            />
-            <Field
-              name='email'
-              type='email'
-              component={this.renderField}
-              label='Email'
-              validate={required}
-            />
-            <Field
-              name='password'
-              type='password'
-              component={this.renderField}
-              label='Password'
-              validate={required}
-            />
-            <Field
-              name='password2'
-              type='password'
-              component={this.renderField}
-              label='Confirm Password'
-              validate={[required, passwordsMatch]}
-            />
-            <button className='ui primary button'>Sign Up</button>
-          </form>
-          <p style={{ marginTop: '1rem' }}>
-            Already have an account? <Link to='/login'>Login</Link>
-          </p>
+      <div className="ui container">
+        <div className='ui grid'>
+          <div className="four wide column"></div>
+          <div className='eight wide column'>
+            <div className="ui segment">
+              <form
+                onSubmit={this.props.handleSubmit(this.onSubmit)}
+                className='ui form'
+              >
+                <Field
+                  name='username'
+                  type='text'
+                  component={this.renderField}
+                  label='Username'
+                  validate={[required, minLength3, maxLength15]}
+                />
+                <Field
+                  name='email'
+                  type='email'
+                  component={this.renderField}
+                  label='Email'
+                  validate={required}
+                />
+                <Field
+                  name='password'
+                  type='password'
+                  component={this.renderField}
+                  label='Password'
+                  validate={required}
+                />
+                <Field
+                  name='password2'
+                  type='password'
+                  component={this.renderField}
+                  label='Confirm Password'
+                  validate={[required, passwordsMatch]}
+                />
+                <button className='ui primary button'>Sign Up</button>
+              </form>
+              <p style={{ marginTop: '1rem' }}>
+                Already have an account? <Link to='/login'>Login</Link>
+              </p>
+            </div>
+          </div>
+          <div className="four wide column"></div>
         </div>
       </div>
     );

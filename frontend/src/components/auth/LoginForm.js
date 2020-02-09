@@ -36,33 +36,39 @@ class LoginForm extends Component {
     }
     return (
       <div className='ui container'>
-        <div className='ui segment'>
-          <form
-            onSubmit={this.props.handleSubmit(this.onSubmit)}
-            className='ui form'
-          >
-            <Field
-              name='username'
-              type='text'
-              component={this.renderField}
-              label='Username'
-            />
-            <Field
-              name='password'
-              type='password'
-              component={this.renderField}
-              label='Password'
-            />
-            <Field
-              name='non_field_errors'
-              type='hidden'
-              component={this.hiddenField}
-            />
-            <button className='ui primary button'>Login</button>
-          </form>
-          <p style={{ marginTop: '1rem' }}>
-            Don't have an account? <Link to='/register'>Register</Link>
-          </p>
+        <div className="ui grid">
+          <div className="four wide column"></div>
+          <div className='eight wide column'>
+            <div className="ui segment">
+              <form
+                onSubmit={this.props.handleSubmit(this.onSubmit)}
+                className='ui form'
+              >
+                <Field
+                  name='username'
+                  type='text'
+                  component={this.renderField}
+                  label='Username'
+                />
+                <Field
+                  name='password'
+                  type='password'
+                  component={this.renderField}
+                  label='Password'
+                />
+                <Field
+                  name='non_field_errors'
+                  type='hidden'
+                  component={this.hiddenField}
+                />
+                <button className='ui primary button'>Login</button>
+              </form>
+              <p style={{ marginTop: '1rem' }}>
+                Don't have an account? <Link to='/register'>Sign Up</Link>
+              </p>
+            </div>
+          </div>
+          <div className="four wide column"></div>
         </div>
       </div>
     );
