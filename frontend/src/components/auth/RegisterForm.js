@@ -60,7 +60,7 @@ class RegisterForm extends Component {
               label='Confirm Password'
               validate={[required, passwordsMatch]}
             />
-            <button className='ui primary button'>Register</button>
+            <button className='ui primary button'>Sign Up</button>
           </form>
           <p style={{ marginTop: '1rem' }}>
             Already have an account? <Link to='/login'>Login</Link>

@@ -1,4 +1,4 @@
 *.DS_Store
 *.pyc
 /node_modules/
-/__pychache__/
+__pychache__/

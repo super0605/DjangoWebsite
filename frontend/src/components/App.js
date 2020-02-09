@@ -16,6 +16,8 @@ import { Provider } from 'react-redux';
 import store from '../store';
 import { loadUser } from '../actions/auth';
 
+// import 'semantic-ui-css/semantic.min.css';
+
 class App extends Component {
   componentDidMount() {
     store.dispatch(loadUser());
