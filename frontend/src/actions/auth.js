@@ -13,11 +13,11 @@ import {
 } from './types';
 
 // LOAD USER
-export const loadUser = () => async (dispatch, getState) => {
+export const loadUser = () => async (dispatch) => {
   dispatch({ type: USER_LOADING });
 
   try {
-    const res = await axios.get('/api/auth/user', tokenConfig(getState));
+    const res = await axios.get('/core/current_user', tokenConfig());
     dispatch({
       type: USER_LOADED,
       payload: res.data
@@ -42,7 +42,8 @@ export const register = ({ username, email, password }) => async dispatch => {
   const body = JSON.stringify({ username, email, password });
 
   try {
-    const res = await axios.post('/api/auth/register', body, config);
+    const res = await axios.post('/core/users/', body, config);
+    console.log('res ==+>', res)
     dispatch({
       type: REGISTER_SUCCESS,
       payload: res.data
@@ -68,7 +69,7 @@ export const login = ({ username, password }) => async dispatch => {
   const body = JSON.stringify({ username, password });
 
   try {
-    const res = await axios.post('/api/auth/login', body, config);
+    const res = await axios.post('/token-auth/', body, config);
     dispatch({
       type: LOGIN_SUCCESS,
       payload: res.data
@@ -82,17 +83,19 @@ export const login = ({ username, password }) => async dispatch => {
 };
 
 // LOGOUT USER
-export const logout = () => async (dispatch, getState) => {
-  await axios.post('/api/auth/logout', null, tokenConfig(getState));
+export const logout = () => async (dispatch) => {
+  // await axios.post('/api/auth/logout', null, tokenConfig());
   dispatch({
     type: LOGOUT_SUCCESS
   });
 };
 
 // helper function
-export const tokenConfig = getState => {
+export const tokenConfig = () => {
   // Get token
-  const token = getState().auth.token;
+  // const token = getState().auth.token;
+  const token = localStorage.getItem('token');
+  console.log('token ==========+>', token)
 
   // Headers
   const config = {
@@ -102,7 +105,8 @@ export const tokenConfig = getState => {
   };
 
   if (token) {
-    config.headers['Authorization'] = `Token ${token}`;
+    // config.headers['Authorization'] = `Token ${token}`;
+    config.headers['Authorization'] = `JWT ${localStorage.getItem('token')}`;
   }
 
   return config;

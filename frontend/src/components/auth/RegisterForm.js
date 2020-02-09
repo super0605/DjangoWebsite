@@ -39,13 +39,13 @@ class RegisterForm extends Component {
               label='Username'
               validate={[required, minLength3, maxLength15]}
             />
-            <Field
+            {/* <Field
               name='email'
               type='email'
               component={this.renderField}
               label='Email'
               validate={required}
-            />
+            /> */}
             <Field
               name='password'
               type='password'

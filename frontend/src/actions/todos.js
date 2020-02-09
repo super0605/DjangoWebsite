@@ -5,8 +5,8 @@ import { tokenConfig } from './auth';
 import { GET_TODOS, GET_TODO, ADD_TODO, DELETE_TODO, EDIT_TODO } from './types';
 
 // GET TODOS
-export const getTodos = () => async (dispatch, getState) => {
-  const res = await axios.get('/api/todos/', tokenConfig(getState));
+export const getTodos = () => async (dispatch) => {
+  const res = await axios.get('/api/todos/', tokenConfig());
   dispatch({
     type: GET_TODOS,
     payload: res.data
@@ -14,8 +14,8 @@ export const getTodos = () => async (dispatch, getState) => {
 };
 
 // GET TODO
-export const getTodo = id => async (dispatch, getState) => {
-  const res = await axios.get(`/api/todos/${id}/`, tokenConfig(getState));
+export const getTodo = id => async (dispatch) => {
+  const res = await axios.get(`/api/todos/${id}/`, tokenConfig());
   dispatch({
     type: GET_TODO,
     payload: res.data
@@ -23,22 +23,22 @@ export const getTodo = id => async (dispatch, getState) => {
 };
 
 // ADD TODO
-export const addTodo = formValues => async (dispatch, getState) => {
+export const addTodo = formValues => async (dispatch) => {
   const res = await axios.post(
     '/api/todos/',
     { ...formValues },
-    tokenConfig(getState)
+    tokenConfig()
   );
   dispatch({
     type: ADD_TODO,
     payload: res.data
   });
-  dispatch(reset('todoForm')); //
+  dispatch(reset('todoForm')); // 
 };
 
 // DELETE TODO
-export const deleteTodo = id => async (dispatch, getState) => {
-  await axios.delete(`/api/todos/${id}/`, tokenConfig(getState));
+export const deleteTodo = id => async (dispatch) => {
+  await axios.delete(`/api/todos/${id}/`, tokenConfig());
   dispatch({
     type: DELETE_TODO,
     payload: id
@@ -47,11 +47,11 @@ export const deleteTodo = id => async (dispatch, getState) => {
 };
 
 // EDIT TODO
-export const editTodo = (id, formValues) => async (dispatch, getState) => {
+export const editTodo = (id, formValues) => async (dispatch) => {
   const res = await axios.patch(
     `/api/todos/${id}/`,
     formValues,
-    tokenConfig(getState)
+    tokenConfig()
   );
   dispatch({
     type: EDIT_TODO,
