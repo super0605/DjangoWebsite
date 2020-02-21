@@ -30,7 +30,7 @@ export const loadUser = () => async (dispatch, getState) => {
 };
 
 // REGISTER USER
-export const register = ({ username, email, password, userRole }) => async dispatch => {
+export const register = ({ username, email, password, user_type }) => async dispatch => {
   // Headers
   const config = {
     headers: {
@@ -38,8 +38,11 @@ export const register = ({ username, email, password, userRole }) => async dispa
     }
   };
 
+  const is_student = user_type === 'is_student' ? true : false;
+  const is_teacher = user_type === 'is_teacher' ? true : false;
+
   // Request Body
-  const body = JSON.stringify({ username, email, password, userRole });
+  const body = JSON.stringify({ username, email, password, is_student, is_teacher });
 
   try {
     const res = await axios.post('/api/auth/register', body, config);

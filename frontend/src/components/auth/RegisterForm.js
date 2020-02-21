@@ -86,7 +86,7 @@ class RegisterForm extends Component {
                   validate={[required, passwordsMatch]}
                 />
                 <Field
-                  name="userRole"
+                  name="user_type"
                   component={this.renderSelectField}
                   label="Role"
                   validate={required}
