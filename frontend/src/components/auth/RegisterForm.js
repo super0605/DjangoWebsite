@@ -1,17 +1,39 @@
-import React, { Component } from 'react';
-import { Link, Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { Field, reduxForm } from 'redux-form';
-import { register } from '../../actions/auth';
+import React, { Component } from "react";
+import { Link, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import { Field, reduxForm } from "redux-form";
+import { Select } from "semantic-ui-react";
+import { register } from "../../actions/auth";
+
+const roles = [
+  { key: "is_student", value: "is_student", text: "Student" },
+  { key: "is_teacher", value: "is_teacher", text: "Teacher" }
+];
 
 class RegisterForm extends Component {
   renderField = ({ input, label, type, meta: { touched, error } }) => {
     return (
-      <div className={`field ${touched && error ? 'error' : ''}`}>
+      <div className={`field ${touched && error ? "error" : ""}`}>
         <label>{label}</label>
         <input {...input} type={type} />
         {touched && error && (
-          <span className='ui pointing red basic label'>{error}</span>
+          <span className="ui pointing red basic label">{error}</span>
+        )}
+      </div>
+    );
+  };
+
+  renderSelectField = ({ input, label, meta: { touched, error } }) => {
+    return (
+      <div className={`field ${touched && error ? "error" : ""}`}>
+        <label>{label}</label>
+        <select {...input} className="ui selection dropdown">
+          <option></option>
+          <option value="is_student">Student</option>
+          <option value="is_teacher">Teacher</option>
+        </select>
+        {touched && error && (
+          <span className="ui pointing red basic label">{error}</span>
         )}
       </div>
     );
@@ -23,50 +45,56 @@ class RegisterForm extends Component {
 
   render() {
     if (this.props.isAuthenticated) {
-      return <Redirect to='/' />;
+      return <Redirect to="/" />;
     }
     return (
       <div className="ui container">
-        <div className='ui grid'>
+        <div className="ui grid">
           <div className="four wide column"></div>
-          <div className='eight wide column'>
+          <div className="eight wide column">
             <div className="ui segment">
               <form
                 onSubmit={this.props.handleSubmit(this.onSubmit)}
-                className='ui form'
+                className="ui form"
               >
                 <Field
-                  name='username'
-                  type='text'
+                  name="username"
+                  type="text"
                   component={this.renderField}
-                  label='Username'
+                  label="Username"
                   validate={[required, minLength3, maxLength15]}
                 />
                 <Field
-                  name='email'
-                  type='email'
+                  name="email"
+                  type="email"
                   component={this.renderField}
-                  label='Email'
+                  label="Email"
                   validate={required}
                 />
                 <Field
-                  name='password'
-                  type='password'
+                  name="password"
+                  type="password"
                   component={this.renderField}
-                  label='Password'
+                  label="Password"
                   validate={required}
                 />
                 <Field
-                  name='password2'
-                  type='password'
+                  name="password2"
+                  type="password"
                   component={this.renderField}
-                  label='Confirm Password'
+                  label="Confirm Password"
                   validate={[required, passwordsMatch]}
                 />
-                <button className='ui primary button'>Sign Up</button>
+                <Field
+                  name="userRole"
+                  component={this.renderSelectField}
+                  label="Role"
+                  validate={required}
+                />
+                <button className="ui primary button">Sign Up</button>
               </form>
-              <p style={{ marginTop: '1rem' }}>
-                Already have an account? <Link to='/login'>Login</Link>
+              <p style={{ marginTop: "1rem" }}>
+                Already have an account? <Link to="/login">Login</Link>
               </p>
             </div>
           </div>
@@ -77,7 +105,7 @@ class RegisterForm extends Component {
   }
 }
 
-const required = value => (value ? undefined : 'Required');
+const required = value => (value ? undefined : "Required");
 
 const minLength = min => value =>
   value && value.length < min
@@ -92,17 +120,14 @@ const maxLength = max => value =>
 const maxLength15 = maxLength(15);
 
 const passwordsMatch = (value, allValues) =>
-  value !== allValues.password ? 'Passwords do not match' : undefined;
+  value !== allValues.password ? "Passwords do not match" : undefined;
 
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated
 });
 
-RegisterForm = connect(
-  mapStateToProps,
-  { register }
-)(RegisterForm);
+RegisterForm = connect(mapStateToProps, { register })(RegisterForm);
 
 export default reduxForm({
-  form: 'registerForm'
+  form: "registerForm"
 })(RegisterForm);

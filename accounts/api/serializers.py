@@ -9,7 +9,7 @@ User._meta.get_field('email')._unique = True
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'username', 'email', 'is_student')
+        fields = ('id', 'username', 'email')
 
 
 class RegisterSerializer(serializers.ModelSerializer):
@@ -18,12 +18,21 @@ class RegisterSerializer(serializers.ModelSerializer):
         fields = ('id', 'username', 'email', 'password', 'is_student')
         extra_kwargs = {'password': {'write_only': True}}
 
-    def create(self, validated_data):
+    def create(self, validated_data, **extra_fields):
+        extra_fields.setdefault('is_student', False)
+        extra_fields.setdefault('is_superuser', False)
+        extra_fields.setdefault('is_teacher', False)
+
+        if validated_data['userRole'] is None:
+            extra_fields[validated_data['userRole']] = True
+
+
         user = User.objects.create_user(
             validated_data['username'],
             validated_data['email'],
             validated_data['password'],
-            validated_data['is_student']
+            validated_data['is_student'],
+            **extra_fields
         )
         return user
 
