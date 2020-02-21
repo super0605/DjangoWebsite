@@ -16,6 +16,9 @@ class Header extends Component {
             <a onClick={this.props.logout} className='item'>
               Logout
             </a>
+            <Link to='/account' className='item'>
+              account
+            </Link>
           </div>
         </div>
       </div>

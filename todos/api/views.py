@@ -1,7 +1,7 @@
 from rest_framework import viewsets, permissions
 
 from .serializers import TodoSerializer
-# from todos.models import Todo
+from todos.models import Todo
 
 
 class TodoViewSet(viewsets.ModelViewSet):
@@ -10,7 +10,10 @@ class TodoViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
-        return self.request.user.todos.all()
+        if self.request.user.is_superuser:
+            return Todo.objects.all()
+        else:
+            return self.request.user.todos.all()
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
