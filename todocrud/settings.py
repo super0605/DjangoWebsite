@@ -126,3 +126,6 @@ REST_FRAMEWORK = {
     ),
     'DATETIME_FORMAT': "%m/%d/%Y %H:%M:%S",
 }
+
+# User Role
+AUTH_USER_MODEL = 'accounts.User'

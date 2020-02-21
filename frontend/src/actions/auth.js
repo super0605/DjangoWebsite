@@ -30,7 +30,7 @@ export const loadUser = () => async (dispatch, getState) => {
 };
 
 // REGISTER USER
-export const register = ({ username, email, password }) => async dispatch => {
+export const register = ({ username, email, password, is_student }) => async dispatch => {
   // Headers
   const config = {
     headers: {
@@ -39,7 +39,7 @@ export const register = ({ username, email, password }) => async dispatch => {
   };
 
   // Request Body
-  const body = JSON.stringify({ username, email, password });
+  const body = JSON.stringify({ username, email, password, is_student });
 
   try {
     const res = await axios.post('/api/auth/register', body, config);
