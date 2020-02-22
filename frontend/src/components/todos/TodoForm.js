@@ -3,6 +3,7 @@ import { Field, reduxForm } from 'redux-form';
 
 class TodoForm extends Component {
   renderField = ({ input, label, meta: { touched, error } }) => {
+    console.log('input =======>', this.props.initialValues)
     return (
       <div className={`field ${touched && error ? 'error' : ''}`}>
         <label>{label}</label>
