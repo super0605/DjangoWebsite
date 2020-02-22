@@ -7,6 +7,8 @@ import Header from './layout/Header';
 import Dashboard from './todos/Dashboard';
 import TodoDelete from './todos/TodoDelete';
 import TodoEdit from './todos/TodoEdit';
+import Accounts from './accounts/Accounts';
+import Profile from './accounts/Profile';
 
 import RegisterForm from './auth/RegisterForm';
 import LoginForm from './auth/LoginForm';
@@ -30,6 +32,8 @@ class App extends Component {
           <Header />
           <Switch>
             <PrivateRoute exact path='/' component={Dashboard} />
+            <Route exact path='/accounts' component={Accounts} />
+            <Route exact path='/accounts/:id' component={Profile} />
             <Route exact path='/delete/:id' component={TodoDelete} />
             <Route exact path='/edit/:id' component={TodoEdit} />
             <Route exact path='/register' component={RegisterForm} />

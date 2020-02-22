@@ -1,46 +1,48 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { logout } from '../../actions/auth';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { logout } from "../../actions/auth";
 
 class Header extends Component {
   render() {
     const { user, isAuthenticated } = this.props.auth;
 
     const userLinks = (
-      <div className='right menu'>
-        <div className='ui simple dropdown item'>
-          {user ? user.username : ''}
-          <i className='dropdown icon' />
-          <div className='menu'>
-            <a onClick={this.props.logout} className='item'>
+      <div className="right menu">
+        <div className="ui simple dropdown item">
+          {user ? user.username : ""}
+          <i className="dropdown icon" />
+          <div className="menu">
+            <a onClick={this.props.logout} className="item">
               Logout
             </a>
-            <Link to='/account' className='item'>
-              account
-            </Link>
+            {user && (
+              <Link to={`/accounts/${user.id}`} className="item">
+                account
+              </Link>
+            )}
           </div>
         </div>
       </div>
     );
 
     const guestLinks = (
-      <div className='right menu'>
-        <Link to='/register' className='item'>
+      <div className="right menu">
+        <Link to="/register" className="item">
           Sign Up
         </Link>
-        <Link to='/login' className='item'>
+        <Link to="/login" className="item">
           Login
         </Link>
       </div>
     );
 
     return (
-      <div className='ui inverted menu' style={{ borderRadius: '0' }}>
-        <Link to='/' className='header item'>
+      <div className="ui inverted menu" style={{ borderRadius: "0" }}>
+        <Link to="/" className="header item">
           SPA
         </Link>
-        <Link to='/' className='item'>
+        <Link to="/" className="item">
           Home
         </Link>
         {isAuthenticated ? userLinks : guestLinks}
@@ -53,7 +55,4 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(
-  mapStateToProps,
-  { logout }
-)(Header);
+export default connect(mapStateToProps, { logout })(Header);
