@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 import todos from './todos';
 import auth from './auth';
+import users from './users';
 import { LOGOUT_SUCCESS } from '../actions/types';
 
 // export default combineReducers({
@@ -13,7 +14,8 @@ import { LOGOUT_SUCCESS } from '../actions/types';
 const appReducer = combineReducers({
   form: formReducer,
   todos,
-  auth
+  auth,
+  users
 });
 
 const rootReducer = (state, action) => {

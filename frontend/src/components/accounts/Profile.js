@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
-import { Select } from "semantic-ui-react";
 import { register } from "../../actions/auth";
+import { getUser } from "../../actions/users";
 
 const roles = [
   { key: "is_student", value: "is_student", text: "Student" },
@@ -11,6 +11,11 @@ const roles = [
 ];
 
 class Profile extends Component {
+
+  componentDidMount() {
+    this.props.getUser(this.props.match.params.id);
+  }
+
   renderField = ({ input, label, type, meta: { touched, error } }) => {
     return (
       <div className={`field ${touched && error ? "error" : ""}`}>
@@ -120,7 +125,7 @@ const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated
 });
 
-Profile = connect(mapStateToProps, { register })(Profile);
+Profile = connect(mapStateToProps, { register, getUser })(Profile);
 
 export default reduxForm({
   form: "Profile"
